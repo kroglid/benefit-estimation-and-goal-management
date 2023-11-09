@@ -1,0 +1,28 @@
+modules:
+  jira:projectPage:
+    - key: benefits-estimation
+      resource: main
+      queue: queue-name
+      resolver:
+        function: resolver
+      title: Benefits Estimation
+      layout: blank
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/benefits-estimation/build
+    tunnel:
+      port: 3000
+app:
+  id: ari:cloud:ecosystem::app/a64e4747-a409-44f5-b700-9857ffca8a30
+permissions:
+  content:
+    styles:
+      - unsafe-inline
+  scopes:
+    - read:jira-work
+    - write:jira-work
+    - manage:jira-project
+    - storage:app
