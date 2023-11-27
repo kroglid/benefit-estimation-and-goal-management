@@ -12,7 +12,7 @@ import { useAppContext } from "../../../Contexts/AppContext"
 
 export const DeleteGoal = () => {
   const api = useAPI()
-  const {goal_tier_id, goal_id} = useParams()
+  const {goal_collection_id, goal_id} = useParams()
   const [scope] = useAppContext();
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,8 +22,8 @@ export const DeleteGoal = () => {
   const key = location.state?.goal_key
 
   useEffect(() => {
-    console.log(goal_tier_id, goal_id, key)
-    if (goal_tier_id && goal_id && key) {
+    console.log(goal_collection_id, goal_id, key)
+    if (goal_collection_id && goal_id && key) {
       showAlert({
         title: `Delete ${key}`,
         body: `Are you sure you want to delete ${key}?`,
@@ -34,11 +34,11 @@ export const DeleteGoal = () => {
     }else{
       navigate('..')
     }
-  }, [goal_tier_id, key]);
+  }, [goal_collection_id, key]);
 
   const deleteGC = async () => {
-    if (goal_tier_id && goal_id && key) {
-      await api.goal.delete(scope.id, goal_tier_id, goal_id).then(() => {
+    if (goal_collection_id && goal_id && key) {
+      await api.goal.delete(scope.id, goal_collection_id, goal_id).then(() => {
         navigate('..', { state: { refresh: true } })
         showFlag({
           title: "Deleted",

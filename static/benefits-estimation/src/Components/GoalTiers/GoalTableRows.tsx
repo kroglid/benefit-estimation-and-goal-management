@@ -95,8 +95,8 @@ export const GoalTableRows = (goalTier: GoalTier, items: GoalTableItem[]): RowTy
                   <DropdownItem onClick={() => navigation(`${item.id}/remove`, { state: { connectionName: item.key, connectionType: item.scopeType } })}>Remove</DropdownItem>
                 ):(
                   <>
-                    <DropdownItem onClick={() => navigation(`${item.id}/edit-goal`)}>Edit</DropdownItem>
-                    <DropdownItem onClick={() => navigation(`${item.id}/delete`, { state: { goal_key: item.key } })}>Delete</DropdownItem>
+                    <DropdownItem onClick={() => navigation(`${goalTier.id}/${item.id}/edit-goal`)}>Edit</DropdownItem>
+                    <DropdownItem onClick={() => navigation(`${goalTier.id}/${item.id}/delete`, { state: { goal_key: item.key } })}>Delete</DropdownItem>
                   </>
                 )}
               </DropdownItemGroup>

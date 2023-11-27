@@ -27,7 +27,7 @@ export const SetValues = () => {
   const [method, setMethod] = useState<string>(`${balancedPointsEnum.WEIGHT}`)
   const [postfix, setPostfix] = useState<string>('')
 
-  const { goal_tier_id } = useParams()
+  const { goal_collection_id } = useParams()
   const navigate = useNavigate()
   const [ scope ] = useAppContext()
   const api = useAPI()
@@ -70,15 +70,15 @@ export const SetValues = () => {
   }, []);
 
   useEffect(() => {
-    if (goal_tier_id) {
-      const goalCollectionId = goal_tier_id
+    if (goal_collection_id) {
+      const goalCollectionId = goal_collection_id
       setLoading(true)
       fetch(goalCollectionId).then((goals) => {
         setGoals(goals)
         setLoading(false)
       })
     }
-  }, [goal_tier_id])
+  }, [goal_collection_id])
 
   const postfixRef = useRef<HTMLInputElement | null>(null);
 

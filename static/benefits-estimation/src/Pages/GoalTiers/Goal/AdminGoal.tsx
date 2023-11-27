@@ -24,15 +24,15 @@ export const AdminGoal = (props: AdminGoalProps) => {
   const [goalCollection, setGoalCollection] = useState<GoalCollection | undefined>(undefined)
   const [isLoading, setLoading] = useState<boolean>(props.mode === "edit" ? true : false)
   
-  const { goal_tier_type, goal_tier_id, goal_id } = useParams();
+  const { goal_collection_id, goal_id } = useParams();
   
   const navigation = useNavigate();
   const [scope] = useAppContext()
   const api = useAPI()
 
   useEffect(() => {
-    if (goal_tier_id) {
-      api.goalCollection.get(scope.id, goal_tier_id).then((response) => {
+    if (goal_collection_id) {
+      api.goalCollection.get(scope.id, goal_collection_id).then((response) => {
         if (response) {
           setGoalCollection(response)
         }else{
@@ -43,7 +43,7 @@ export const AdminGoal = (props: AdminGoalProps) => {
         closeDrawer(false)
       })
       if (props.mode === "edit" && goal_id) {
-        api.goal.get(scope.id, goal_tier_id, goal_id).then((response) => {
+        api.goal.get(scope.id, goal_collection_id, goal_id).then((response) => {
           console.log(response)
           if (response === undefined) {
             closeDrawer(false)

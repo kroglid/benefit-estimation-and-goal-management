@@ -91,13 +91,13 @@ export const GoalTable = ({goalTier, onFetching}: GoalTableProps) => {
 
   const NewGoalButton = () => {
     return(
-      <Button onClick={() => navigation(`create-goal`)}>New Goal</Button>
+      <Button onClick={() => navigation(`${goalTier.id}/create-goal`)}>New Goal</Button>
     )
   }
 
   const SetValues = () => {
     return(
-      <Button iconBefore={<BitbucketCompareIcon label="compare"/>} onClick={() => navigation(`set-values`)}>Set Values</Button>
+      <Button iconBefore={<BitbucketCompareIcon label="compare"/>} onClick={() => navigation(`${goalTier.id}/set-values`)}>Set Values</Button>
     )
   }
   const ResetValues = () => {
@@ -119,25 +119,35 @@ export const GoalTable = ({goalTier, onFetching}: GoalTableProps) => {
   }
 
   return(
-    <>
-      <Box xcss={xcss({marginBottom: 'space.100'})}>
-        <ButtonGroup>
-          {goalTier.type === GoalTierTypeEnum.GOAL_COLLECTION && (
-            <>
-              {NewGoalButton()}
-              {items && items.length > 0 && (
-                <>
-                  {SetValues()}
-                  {ResetValues()}
-                </>
-              )}
-            </>
-          )}
-          {goalTier.type === GoalTierTypeEnum.PORTFOLIO_ITEM && (
-            AddPortfolioItem()
-          )}
-        </ButtonGroup>
-      </Box>
+    <Box xcss={xcss({
+      backgroundColor: 'elevation.surface.sunken',
+      paddingTop: 'space.200',
+      paddingLeft: 'space.200',
+      paddingRight: 'space.200',
+      paddingBottom: 'space.025',
+    })}>
+      {goalTier.type !== GoalTierTypeEnum.PRODUCT_ELEMENT_TYPE && (
+        <Box xcss={xcss({
+          paddingBottom: 'space.200',
+        })}>
+          <ButtonGroup>
+            {goalTier.type === GoalTierTypeEnum.GOAL_COLLECTION && (
+              <>
+                {NewGoalButton()}
+                {items && items.length > 0 && (
+                  <>
+                    {SetValues()}
+                    {ResetValues()}
+                  </>
+                )}
+              </>
+            )}
+            {goalTier.type === GoalTierTypeEnum.PORTFOLIO_ITEM && (
+              AddPortfolioItem()
+            )}
+          </ButtonGroup>
+        </Box>
+      )}
       <DynamicTable
         head={head()}
         rows={rows()}
@@ -174,6 +184,6 @@ export const GoalTable = ({goalTier, onFetching}: GoalTableProps) => {
         }
       />
       <Outlet/>
-    </>
+    </Box>
   );
 };

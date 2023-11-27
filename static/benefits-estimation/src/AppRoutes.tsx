@@ -14,26 +14,26 @@ import { Disconnect } from "./Pages/GoalTiers/PortfolioItems/Disconnect"
 import { DeleteGoalCollection } from "./Pages/GoalStructure/DeleteGoalCollection"
 import { DeleteGoal } from "./Pages/GoalTiers/Goal/DeleteGoal"
 import { AdminPortfolio } from "./Pages/Portfolio/AdminPortfolio"
+import { NewGoalStructure } from "./Pages/GoalStructure/NewGoalStructure"
 
 export const AppRoutes = () => {
   return(
     <Routes>
       <Route path=":scopeType?/:scopeId?" element={<AppContextProvider/>}>
         <Route index element={<Home />}/>
-        <Route path="goal-tier" element={<GoalTiers />}/>
         <Route path="goal-tier/:goal_tier_type/:goal_tier_id" element={<GoalTiers />}>
-          <Route path=":goal_id/edit-goal" element={<AdminGoal mode="edit" />}/>
-          <Route path=":goal_id/delete" element={<DeleteGoal/>}/>
-          <Route path="create-goal" element={<AdminGoal mode="create" />}/>
-          <Route path="set-values" element={<SetValues/>}/>
-          <Route path=":portfolio_item_id/remove" element={<Disconnect />}/>
-          <Route path="portfolio-item/add" element={<AddPortfolioItems />}/>
         </Route>
-        <Route path="goal-structure" element={<GoalStructure />}>
+        <Route path="goal-structure" element={<NewGoalStructure />}>
           <Route path="change-tier-level/:goal_collection_id_1/:goal_collection_id_2" element={<ChangeTierLevel/>}/>
           <Route path="create-goal-collection" element={<AdminGoalCollection mode="create" />}/>
           <Route path=":goal_collection_id/edit-goal-collection" element={<AdminGoalCollection mode="edit" />}/>
           <Route path=":goal_collection_id/delete" element={<DeleteGoalCollection/>}/>
+          <Route path=":goal_collection_id/:goal_id/edit-goal" element={<AdminGoal mode="edit" />}/>
+          <Route path=":goal_collection_id/:goal_id/delete" element={<DeleteGoal/>}/>
+          <Route path=":goal_collection_id/create-goal" element={<AdminGoal mode="create" />}/>
+          <Route path=":goal_collection_id/set-values" element={<SetValues/>}/>
+          <Route path=":portfolio_item_id/remove" element={<Disconnect />}/>
+          <Route path="portfolio-item/add" element={<AddPortfolioItems />}/>
         </Route>
         <Route path="estimation" element={<Estimation />}/>
         <Route path="estimation/:goal_tier_type/:goal_tier_id/:criteria_goal_tier_id" element={<Estimation />}/>

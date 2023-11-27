@@ -24,10 +24,6 @@ export const HeaderNavigation = () => {
       src: "goal-structure",
     },
     {
-      name: "Goal Tier",
-      src: "goal-tier",
-    },
-    {
       name: "Estimation",
       src: "estimation",
     },
